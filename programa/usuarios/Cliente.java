@@ -34,4 +34,20 @@ public class Cliente extends Usuario implements Cloneable{
         System.out.println(c1.getNombre());
 
     }*/
+
+    public String getNombre() {
+        return this.nombre;
+    }
+
+    public String getApellidos() {
+        return this.apellidos;
+    }
+
+    public String getCorreoElectronico() {
+        return this.correoElectronico;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 }
