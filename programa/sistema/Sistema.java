@@ -4,6 +4,7 @@ public class Sistema {
     private Administrador admin;
     private LinkedList<Cliente> clientes; 
 
+    // Constructores
     public Sistema(Administrador admin, LinkedList<Cliente> clientes) {
         this.admin = admin;
         this.clientes = clientes;
@@ -14,6 +15,7 @@ public class Sistema {
         this.clientes = new LinkedList<Cliente>();
     }
 
+    // Getters y Setters
     public Administrador getAdmin() {
         return admin;
     }
@@ -28,5 +30,10 @@ public class Sistema {
 
     public void setClientes(LinkedList<Cliente> clientes) {
         this.clientes = clientes;
-    }   
+    }  
+    
+    // Métodos
+    public void pantallaPrincipal() {
+        System.out.println("Bienvenido al sistema de administración de clientes");
+    }
 }
