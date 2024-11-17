@@ -4,7 +4,7 @@ public class Usuario{
   String nombreUsuario;
   String password;
   
-  public Usuario(String nombreUsuario,String Password){
+  public Usuario(String nombreUsuario, String Password){
     this.nombreUsuario = nombreUsuario;
     this.password = Password;
   }
@@ -18,7 +18,7 @@ public class Usuario{
   }
 
   public String getPassword(){
-    return this.nombreUsuario;
+    return this.password;
   }
 
   public void setPassword(String password){

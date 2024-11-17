@@ -3,17 +3,20 @@ package programa.sistema;
 import java.util.LinkedList;
 import java.util.HashMap; 
 import programa.usuarios.*; 
+import programa.eventos.*;
 
 public class Sistema {
     private Admin admin;
-    private HashMap<String, Usuario> clientes; 
+    private HashMap<String, Cliente> clientes; 
+    private LinkedList<Evento> eventos;
     
     // Constructores
 
     // El constructor con parámetros se utiliza para cargar un sistema previamente creado
-    public Sistema(Admin admin, HashMap<String, Usuario> clientes) {
+    public Sistema(Admin admin, HashMap<String, Cliente> clientes, LinkedList<Evento> eventos) {
         this.admin = admin;
         this.clientes = clientes;
+        this.eventos = eventos;
     }
 
     public Sistema() {
@@ -22,7 +25,7 @@ public class Sistema {
          * Password: Admi91711
          */
         this.admin = new Admin("Admi", "Admi91711");
-        this.clientes = new HashMap<String, Usuario>(); 
+        this.clientes = new HashMap<String, Cliente>(); 
 
     }
 
@@ -31,7 +34,7 @@ public class Sistema {
         return admin;
     }
 
-    public HashMap<String, Usuario> getClientes() {
+    public HashMap<String, Cliente> getClientes() {
         return clientes; 
     }
 
@@ -39,7 +42,7 @@ public class Sistema {
         this.admin = admin;
     }
 
-    public void setClientes(HashMap<String, Usuario> clientes) {
+    public void setClientes(HashMap<String, Cliente> clientes) {
         this.clientes = clientes;
     }
     
@@ -75,5 +78,13 @@ public class Sistema {
             return; 
         }
         //System.out.println("¡Bienvenido, " + this.clientes.get(correoElectronico).getNombre() + "!");
+    }
+
+    public void agreagarEvento(Evento evento) {
+        this.eventos.add(evento);
+    }
+
+    public void eliminarEvento(Evento evento) {
+        this.eventos.remove(evento);
     }
 }
