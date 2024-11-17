@@ -1,14 +1,14 @@
 package programa.usuarios;
 
-import programa.cartera.*; 
+import programa.cartera.Cartera; 
+import java.util.LinkedList;
 
 public class Cliente extends Usuario implements Cloneable{
     String nombre; 
     String apellidos; 
     String correoElectronico; 
     Cartera cartera;
-    //Cartera cartera
-    //ArrayList<Boleto> reservaciones
+    LinkedList<Boleto> reservaciones; 
 
     public Cliente(String nombreUsuario, String Password, String nombre, String apellidos, String correoElectronico){
         super(nombreUsuario, Password);
