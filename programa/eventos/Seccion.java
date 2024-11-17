@@ -1,4 +1,4 @@
-package programa.eventos;
+package eventos;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -154,5 +154,15 @@ public class Seccion {
     @Override
     public String toString() {
         return "Sección{Nombre: " + nombre + ", Precio: " + precio + ", Asientos Disponibles: " + asientosDisponibles() + "}";
+    }
+
+    public int conteoAsientosDisponibles()
+    {
+        int disponibles = 0;
+        for(List<Integer> asientos : asientosPorFila.values())
+        {
+            disponibles+= asientos.size();
+        }
+        return disponibles;
     }
 }
