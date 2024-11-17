@@ -1,3 +1,5 @@
+package programa.usuarios;
+
 public class Admin extends Usuario implements Cloneable{
     private String ID;
 
