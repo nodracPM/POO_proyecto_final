@@ -9,11 +9,11 @@ public class Usuario{
     this.password = Password;
   }
 
-  public String getNombre(){
+  public String getNombreUsuario(){
     return this.nombreUsuario;
   }
 
-  public void setNombre(String nombreUsuario){
+  public void setNombreUsuario(String nombreUsuario){
     this.nombreUsuario = nombreUsuario;
   }
 

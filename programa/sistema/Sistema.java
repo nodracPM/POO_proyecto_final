@@ -6,15 +6,14 @@ import programa.usuarios.*;
 
 public class Sistema {
     private Admin admin;
-    private HashMap<String, Usuario> usuarios; // Se utiliza un HashMap para no permitir la dupliación de nombres de usuario
-                                               // El usuario 1 (indíce 0) es el administrador 
+    private HashMap<String, Usuario> clientes; 
     
     // Constructores
 
     // El constructor con parámetros se utiliza para cargar un sistema previamente creado
-    public Sistema(Admin admin, HashMap<String, Usuario> usuarios) {
+    public Sistema(Admin admin, HashMap<String, Usuario> clientes) {
         this.admin = admin;
-        this.usuarios = usuarios;
+        this.clientes = clientes;
     }
 
     public Sistema() {
@@ -23,7 +22,7 @@ public class Sistema {
          * Password: Admi91711
          */
         this.admin = new Admin("Admi", "Admi91711");
-        this.usuarios = new HashMap<String, Usuario>(); 
+        this.clientes = new HashMap<String, Usuario>(); 
 
     }
 
@@ -32,16 +31,16 @@ public class Sistema {
         return admin;
     }
 
-    public HashMap<String, Usuario> getUsuarios() {
-        return usuarios;
+    public HashMap<String, Usuario> getClientes() {
+        return clientes; 
     }
 
     public void setAdmin(Admin admin) {
         this.admin = admin;
     }
 
-    public void setUsuarios(HashMap<String, Usuario> usuarios) {
-        this.usuarios = usuarios;
+    public void setClientes(HashMap<String, Usuario> clientes) {
+        this.clientes = clientes;
     }
     
     // Métodos
@@ -49,8 +48,20 @@ public class Sistema {
         System.out.println("Bienvenido al sistema de administración de clientes");
     }
 
-    public void agregarUsuario(Usuario u) {
-        if(u.getNombre())
-        this.usuarios.put(u.getNombre(), u);
+    public void agregarCliente(Cliente cliente) {
+        if(this.clientes.containsKey(cliente.getCorreoElectronico())) {
+            System.out.println("El correo electrónico ingresado ya se encuentra registrado");
+            return; 
+        }
+
+        clientes.put(cliente.getCorreoElectronico(), cliente);
+    }
+
+    public void eliminarCliente(String correoElectronico) {
+        if(!this.clientes.containsKey(correoElectronico)) {
+            System.out.println("El correo electrónico ingresado no se encuentra registrado");
+            return; 
+        }
+        this.clientes.remove(correoElectronico);
     }
 }
