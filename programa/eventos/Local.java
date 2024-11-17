@@ -18,6 +18,10 @@ public class Local {
         return nombre;
     }
 
+    public String getDireccion() {
+        return direccion;
+    }
+
     public void agregarSeccion(Seccion seccion)
     {
         secciones.add(seccion);
