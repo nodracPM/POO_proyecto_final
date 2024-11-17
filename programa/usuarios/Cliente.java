@@ -1,9 +1,12 @@
 package programa.usuarios;
 
+import programa.cartera.*; 
+
 public class Cliente extends Usuario implements Cloneable{
     String nombre; 
     String apellidos; 
     String correoElectronico; 
+    Cartera cartera;
     //Cartera cartera
     //ArrayList<Boleto> reservaciones
 
@@ -12,8 +15,7 @@ public class Cliente extends Usuario implements Cloneable{
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.correoElectronico = correoElectronico;
-        //iniciar la cartera en algún fondo inicial
-        //Cargar las reservaciones en caso de que se tengan
+        this.cartera = new Cartera();
     }
 
     //getter y setter para la cartera, pero ese código es de Pedro

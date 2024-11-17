@@ -1,22 +1,14 @@
-package programa.usuarios;
+package programa.cartera;
+
+import java.util.LinkedList;
 
 public class Cartera {
-    private double dinero; 
-
-    public Cartera() {
-        this.dinero = 0; 
+    private LinkedList<MetodoPago> metodosPago;
+    public void agregarMetodo(MetodoPago metodo) {
+        this.metodosPago.add(metodo); 
     }
 
-    //getters y setters 
-    public double getDinero() {
-        return dinero; 
-    } 
-
-    public void ingresar_dinero(double dinero) {
-        this.dinero += dinero; 
+    public void eliminarMetodo(MetodoPago metodo) {
+        this.metodosPago.remove(metodo); 
     }
-
-    public void retirar_dinero(double dinero) {
-        this.dinero -= dinero; 
-    } 
 }
