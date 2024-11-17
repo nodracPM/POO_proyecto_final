@@ -1,3 +1,5 @@
+package programa.usuarios;
+
 public class Usuario{
   String Nombre;
   String Password;
@@ -22,5 +24,5 @@ public class Usuario{
   public void setPassword(String Password){
     this.Nombre = Nombre;
   }
-
+  
 }

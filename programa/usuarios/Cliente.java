@@ -1,3 +1,5 @@
+package programa.usuarios;
+
 public class Cliente extends Usuario implements Cloneable{
     //Cartera cartera
     //ArrayList<Boleto> reservaciones

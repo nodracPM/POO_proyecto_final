@@ -1,9 +1,14 @@
+package programa.sistema;
+
 import java.util.LinkedList;
+import java.util.HashMap; 
+import java.programa.usuarios*; 
 
 public class Sistema {
     private Administrador admin;
-    private LinkedList<Cliente> clientes; 
+    private HashMap<String, Cliente> clientes; // Se utiliza un HashMap para no permitir la dupliación de nombres de usuario
 
+    
     // Constructores
     public Sistema(Administrador admin, LinkedList<Cliente> clientes) {
         this.admin = admin;
