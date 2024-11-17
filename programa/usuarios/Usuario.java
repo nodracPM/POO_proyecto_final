@@ -1,28 +1,28 @@
 package programa.usuarios;
 
 public class Usuario{
-  String Nombre;
-  String Password;
+  String nombreUsuario;
+  String password;
   
-  public Usuario(String Nombre,String Password){
-    this.Nombre = Nombre;
-    this.Password = Password;
+  public Usuario(String nombreUsuario,String Password){
+    this.nombreUsuario = nombreUsuario;
+    this.password = Password;
   }
 
   public String getNombre(){
-    return this.Nombre;
+    return this.nombreUsuario;
   }
 
-  public void setNombre(String Nombre){
-    this.Nombre = Nombre;
+  public void setNombre(String nombreUsuario){
+    this.nombreUsuario = nombreUsuario;
   }
 
   public String getPassword(){
-    return this.Nombre;
+    return this.nombreUsuario;
   }
 
-  public void setPassword(String Password){
-    this.Nombre = Nombre;
+  public void setPassword(String password){
+    this.password = password;
   }
   
 }

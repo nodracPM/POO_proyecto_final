@@ -3,7 +3,7 @@ package programa.usuarios;
 public class Admin extends Usuario{
     //private String ID;
 
-    public Admin(String Nombre,String Password){
+    public Admin(String Nombre, String Password){
         super(Nombre,Password);
         //this.ID = ID;
     }
