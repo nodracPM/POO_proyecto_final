@@ -6,32 +6,31 @@ import java.util.List;
 import java.util.Map;
 
 public class Seccion {
-    private Map<String, Boolean> asientos;
+    private Map<Character, List<Integer>> asientosPorFila;
     private String nombre;
     private int capacidad;
     private double precio;
 
     public Seccion(String nombre, int capacidad, double precio) {
-    this.asientos = new HashMap<>();
-    this.capacidad = capacidad;
-    this.nombre = nombre;
-    this.precio = precio;
+        this.asientosPorFila = new HashMap<>();
+        this.capacidad = capacidad;
+        this.nombre = nombre;
+        this.precio = precio;
 
-    char fila = 'A';
-    int numeroAsiento = 1;
+        char fila = 'A';
+        int numeroAsiento = 1;
 
-    for (int i = 1; i <= capacidad; i++) {
-        String asiento = fila + String.valueOf(numeroAsiento);
-        asientos.put(asiento, true);
+        for (int i = 1; i <= capacidad; i++) {
+            asientosPorFila.putIfAbsent(fila, new ArrayList<>());
+            asientosPorFila.get(fila).add(numeroAsiento);
 
-        numeroAsiento++;
-        if (numeroAsiento > 20) { // Avanzar a la siguiente fila después de 20 asientos
-            fila++;
-            numeroAsiento = 1;
+            numeroAsiento++;
+            if (numeroAsiento > 20) { // Avanzar a la siguiente fila después de 20 asientos
+                fila++;
+                numeroAsiento = 1;
+            }
         }
     }
-}
-
 
     public String getNombre() {
         return nombre;
@@ -46,134 +45,114 @@ public class Seccion {
     }
 
     public String asientosDisponibles() {
-    // Crear un mapa para agrupar los asientos por fila
-    Map<Character, StringBuilder> filas = new HashMap<>();
-    
-    // Obtener una lista de los asientos ordenada
-    List<String> asientosOrdenados = new ArrayList<>(asientos.keySet());
-    asientosOrdenados.sort((a, b) -> {
-        char filaA = a.charAt(0);
-        char filaB = b.charAt(0);
-        int numA = Integer.parseInt(a.substring(1));
-        int numB = Integer.parseInt(b.substring(1));
-        
-        // Comparar primero por fila y luego por número
-        if (filaA == filaB) {
-            return Integer.compare(numA, numB);
-        } else {
-            return Character.compare(filaA, filaB);
-        }
-    });
+        StringBuilder resultado = new StringBuilder();
 
-    // Recorrer los asientos y agruparlos por fila
-    for (String asiento : asientosOrdenados) {
-        char fila = asiento.charAt(0);
-    
-        // Inicializar el acumulador de la fila si no existe
-        filas.putIfAbsent(fila, new StringBuilder());
-    
-        // Si el asiento está disponible, añadirlo al acumulador de la fila
-        if (asientos.get(asiento)) {
-            filas.get(fila).append(asiento).append(",");
-        }
-    }
-    
-    // Procesar cada fila para formatear los rangos
-    StringBuilder resultado = new StringBuilder();
-    for (Map.Entry<Character, StringBuilder> entry : filas.entrySet()) {
-        String[] disponibles = entry.getValue().toString().split(",");
-        resultado.append(formatearRangos(disponibles)).append(", ");
-    }
-    
-    // Eliminar la última coma y espacio
-    if (resultado.length() > 0) {
-        resultado.setLength(resultado.length() - 2);
-    }
-    
-    return resultado.toString();
-}
+        for (Map.Entry<Character, List<Integer>> entry : asientosPorFila.entrySet()) {
+            char fila = entry.getKey();
+            List<Integer> disponibles = entry.getValue();
 
-    
-    private String formatearRangos(String[] disponibles) {
-        StringBuilder sb = new StringBuilder();
-        String inicioRango = null;
-    
-        for (int i = 0; i < disponibles.length; i++) {
-            if (inicioRango == null) {
-                inicioRango = disponibles[i];
-            }
-    
-            // Si es el último asiento o el próximo no es consecutivo, cerrar el rango
-            if (i == disponibles.length - 1 || !sonConsecutivos(disponibles[i], disponibles[i + 1])) {
-                if (inicioRango.equals(disponibles[i])) {
-                    sb.append(inicioRango).append(", ");
-                } else {
-                    sb.append(inicioRango).append("-").append(disponibles[i]).append(", ");
-                }
-                inicioRango = null; // Reiniciar el rango
+            // Generar rangos para los asientos disponibles de la fila actual
+            if (!disponibles.isEmpty()) {
+                resultado.append(fila).append(formatearRangos(disponibles)).append(", ");
             }
         }
-    
+
         // Eliminar la última coma y espacio
+        if (resultado.length() > 0) {
+            resultado.setLength(resultado.length() - 2);
+        }
+
+        return resultado.toString();
+    }
+
+    private String formatearRangos(List<Integer> disponibles) {
+        StringBuilder sb = new StringBuilder();
+        int inicio = -1, previo = -1;
+    
+        for (int asiento : disponibles) {
+            if (inicio == -1) {
+                // Iniciar un nuevo rango
+                inicio = asiento;
+            } else if (asiento != previo + 1) {
+                // Detectar un salto y cerrar el rango actual
+                if (inicio == previo) {
+                    sb.append(inicio).append(",");
+                } else {
+                    sb.append(inicio).append("-").append(previo).append(",");
+                }
+                inicio = asiento; // Iniciar un nuevo rango
+            }
+            previo = asiento; // Actualizar el último asiento procesado
+        }
+    
+        // Procesar el último rango
+        if (inicio != -1) {
+            if (inicio == previo) {
+                sb.append(inicio).append(",");
+            } else {
+                sb.append(inicio).append("-").append(previo).append(",");
+            }
+        }
+    
+        // Eliminar la última coma
         if (sb.length() > 0) {
-            sb.setLength(sb.length() - 2);
+            sb.setLength(sb.length() - 1);
         }
     
         return sb.toString();
     }
     
-    private boolean sonConsecutivos(String actual, String siguiente) {
-        char filaActual = actual.charAt(0);
-        char filaSiguiente = siguiente.charAt(0);
-        int numeroActual = Integer.parseInt(actual.substring(1));
-        int numeroSiguiente = Integer.parseInt(siguiente.substring(1));
-    
-        return filaActual == filaSiguiente && numeroSiguiente == numeroActual + 1;
-    }
-    
-    public boolean reservarAsiento(String asiento)
-    {
-        if(!asientos.containsKey(asiento))
-        {
-            System.out.println("El asiento " + asiento +" no existe.");
+
+    public boolean reservarAsiento(String asiento) {
+        char fila = asiento.charAt(0);
+        int numero;
+
+        try {
+            numero = Integer.parseInt(asiento.substring(1));
+        } catch (NumberFormatException e) {
+            System.out.println("El asiento " + asiento + " no es válido.");
             return false;
         }
 
-        if(!asientos.get(asiento))
-        {
-            System.out.println("El asiento " + asiento + " se encuentra reservado.");
+        if (!asientosPorFila.containsKey(fila) || !asientosPorFila.get(fila).contains(numero)) {
+            System.out.println("El asiento " + asiento + " no existe o ya está reservado.");
             return false;
         }
 
-        asientos.put(asiento, false);
-        System.out.println("¡El asiento "+ asiento +" ha sido reservado exitosamente!");
+        asientosPorFila.get(fila).remove((Integer) numero);
+        System.out.println("¡El asiento " + asiento + " ha sido reservado exitosamente!");
         return true;
     }
 
-    public boolean eliminarReservacion(String asiento)
-    {
-        if(!asientos.containsKey(asiento))
-        {
-            System.out.println("El asiento " + asiento +" no existe.");
+    public boolean eliminarReservacion(String asiento) {
+        char fila = asiento.charAt(0);
+        int numero;
+
+        try {
+            numero = Integer.parseInt(asiento.substring(1));
+        } catch (NumberFormatException e) {
+            System.out.println("El asiento " + asiento + " no es válido.");
             return false;
         }
 
-        if(asientos.get(asiento))
-        {
-            System.out.println("El asiento " + asiento + " se encuentra reservado.");
+        if (!asientosPorFila.containsKey(fila)) {
+            System.out.println("El asiento " + asiento + " no existe.");
             return false;
         }
 
-        asientos.put(asiento, true);
-        System.out.println("La reservacion del asiento "+asiento+" se ha cancelado exitosamente.");
+        if (asientosPorFila.get(fila).contains(numero)) {
+            System.out.println("El asiento " + asiento + " no está reservado.");
+            return false;
+        }
+
+        asientosPorFila.get(fila).add(numero);
+        asientosPorFila.get(fila).sort(Integer::compareTo); // Mantener el orden
+        System.out.println("La reservación del asiento " + asiento + " se ha cancelado exitosamente.");
         return true;
     }
 
     @Override
-
-    public String toString()
-    {
-        return "Seccion{Nombre:" +
-        nombre+", Precio: "+precio+", Asientos Disponibles: " + asientosDisponibles();
+    public String toString() {
+        return "Sección{Nombre: " + nombre + ", Precio: " + precio + ", Asientos Disponibles: " + asientosDisponibles() + "}";
     }
 }
