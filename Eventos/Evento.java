@@ -23,7 +23,14 @@ public class Evento
 
     public double calcular_Ganancias()
     {
-        return ganancias;    
+        double ganancias = 0.0;
+
+        for(Seccion seccion: local.secciones)
+        {
+            int asientosReservados = seccion.getCapacidad() - seccion.conteoAsientosDisponibles();
+            ganancias += asientosReservados*seccion.getPrecio();
+        }
+        return Math.round(ganancias*100.0)/100.0;
     }
 
     public int getAsientos() {
@@ -82,4 +89,31 @@ public class Evento
         this.precios = precios;
     }
 
+    // Reservar un asiento
+    public boolean reservarAsiento(String nombreSeccion, String asiento) {
+        return local.reservarAsiento(nombreSeccion, asiento);
+    }
+
+    // Cancelar una reservación
+    public boolean eliminarReservacion(String nombreSeccion, String asiento) {
+        return local.eliminarReservacion(nombreSeccion, asiento);
+    }
+
+    // Resumen de asientos disponibles por sección
+    public String resumenDisponibilidad() {
+        return local.resumenDisponibilidad();
+    }
+
+    // Detalles completos del evento
+    @Override
+    public String toString() {
+        return "Evento ID: " + id +
+               "\nFecha: " + fecha +
+               "\nHora: " + hora +
+               "\nLocal: " + local.getNombre() +
+               "\nDirección: " + local.getDireccion() +
+               "\nCapacidad Total: " + local.getCapacidadTotal() +
+               "\nGanancias Estimadas: $" + String.format("%.2f", calcular_Ganancias()) +
+               "\nResumen de Disponibilidad:\n" + resumenDisponibilidad();
+    }
 }
