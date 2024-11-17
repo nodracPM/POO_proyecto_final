@@ -6,8 +6,7 @@ import programa.usuarios.*;
 
 public class Sistema {
     private Admin admin;
-    private HashMap<String, Usuario> clientes; // Se utiliza un HashMap para no permitir la dupliación de nombres de usuario
-                                               // El usuario 1 (indíce 0) es el administrador 
+    private HashMap<String, Usuario> clientes; 
     
     // Constructores
 
