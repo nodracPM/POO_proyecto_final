@@ -2,43 +2,55 @@ package programa.sistema;
 
 import java.util.LinkedList;
 import java.util.HashMap; 
-import java.programa.usuarios*; 
+import programa.usuarios.*; 
 
 public class Sistema {
-    private Administrador admin;
-    private HashMap<String, Cliente> clientes; // Se utiliza un HashMap para no permitir la dupliación de nombres de usuario
-
+    private Admin admin;
+    private HashMap<String, Usuario> usuarios; // Se utiliza un HashMap para no permitir la dupliación de nombres de usuario
+                                               // El usuario 1 (indíce 0) es el administrador 
     
     // Constructores
-    public Sistema(Administrador admin, LinkedList<Cliente> clientes) {
+
+    // El constructor con parámetros se utiliza para cargar un sistema previamente creado
+    public Sistema(Admin admin, HashMap<String, Usuario> usuarios) {
         this.admin = admin;
-        this.clientes = clientes;
+        this.usuarios = usuarios;
     }
 
     public Sistema() {
-        this.admin = new Administrador();
-        this.clientes = new LinkedList<Cliente>();
+        /* Datos predeterminados para el acceso del administrador: 
+         * Nombre: Admi
+         * Password: Admi91711
+         */
+        this.admin = new Admin("Admi", "Admi91711");
+        this.usuarios = new HashMap<String, Usuario>(); 
+
     }
 
     // Getters y Setters
-    public Administrador getAdmin() {
+    public Admin getAdmin() {
         return admin;
     }
 
-    public LinkedList<Cliente> getClientes() {
-        return clientes;
+    public HashMap<String, Usuario> getUsuarios() {
+        return usuarios;
     }
 
-    public void setAdmin(Administrador admin) {
+    public void setAdmin(Admin admin) {
         this.admin = admin;
     }
 
-    public void setClientes(LinkedList<Cliente> clientes) {
-        this.clientes = clientes;
-    }  
+    public void setUsuarios(HashMap<String, Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
     
     // Métodos
     public void pantallaPrincipal() {
         System.out.println("Bienvenido al sistema de administración de clientes");
+    }
+
+    public void agregarUsuario(Usuario u) {
+        if(u.getNombre())
+        this.usuarios.put(u.getNombre(), u);
     }
 }
