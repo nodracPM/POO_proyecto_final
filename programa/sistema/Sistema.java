@@ -64,4 +64,16 @@ public class Sistema {
         }
         this.clientes.remove(correoElectronico);
     }
+
+    public void iniciarSesion(String correoElectronico, String password) {
+        if(!this.clientes.containsKey(correoElectronico)) {
+            System.out.println("El correo electrónico ingresado no se encuentra registrado");
+            return; 
+        }
+        if(!this.clientes.get(correoElectronico).getPassword().equals(password)) {
+            System.out.println("La contraseña ingresada es incorrecta");
+            return; 
+        }
+        //System.out.println("¡Bienvenido, " + this.clientes.get(correoElectronico).getNombre() + "!");
+    }
 }
