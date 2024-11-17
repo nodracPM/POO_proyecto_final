@@ -1,0 +1,6 @@
+public void TicketTransfer(Cliente origen,Cliente destino, Boleto boleto){
+  temp = boleto.clone();
+  temp.setPropietario(destino.getNombreUsuario());
+  destino.getReservaciones().add(temp);
+  origen.getReservaciones().remove(boleto);
+}
