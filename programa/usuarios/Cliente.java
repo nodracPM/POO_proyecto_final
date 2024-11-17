@@ -1,6 +1,7 @@
 package programa.usuarios;
 
 import programa.cartera.Cartera; 
+import programa.eventos.Boleto;
 import java.util.LinkedList;
 
 public class Cliente extends Usuario implements Cloneable{
