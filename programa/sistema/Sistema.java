@@ -2,26 +2,30 @@ package programa.sistema;
 
 import java.util.LinkedList;
 import java.util.HashMap; 
-import java.programa.usuarios*; 
+import programa.usuarios.*; 
 
 public class Sistema {
-    private Administrador admin;
-    private HashMap<String, Cliente> clientes; // Se utiliza un HashMap para no permitir la dupliación de nombres de usuario
+    private Admin admin;
+    private HashMap<String, Usuario> usuarios; // Se utiliza un HashMap para no permitir la dupliación de nombres de usuario
 
     
     // Constructores
-    public Sistema(Administrador admin, LinkedList<Cliente> clientes) {
+    public Sistema(Admin admin, HashMap<String, Usuario> usuarios) {
         this.admin = admin;
-        this.clientes = clientes;
+        this.usuarios = usuarios;
     }
 
     public Sistema() {
-        this.admin = new Administrador();
+        /* Datos predeterminados para el acceso del administrador: 
+         * Nombre: Admi
+         * Password: Admi'9'11
+         */
+        this.admin = new Admin();
         this.clientes = new LinkedList<Cliente>();
     }
 
     // Getters y Setters
-    public Administrador getAdmin() {
+    public Admin getAdmin() {
         return admin;
     }
 
@@ -29,7 +33,7 @@ public class Sistema {
         return clientes;
     }
 
-    public void setAdmin(Administrador admin) {
+    public void setAdmin(Admin admin) {
         this.admin = admin;
     }
 

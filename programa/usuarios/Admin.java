@@ -1,22 +1,22 @@
 package programa.usuarios;
 
-public class Admin extends Usuario implements Cloneable{
-    private String ID;
+public class Admin extends Usuario{
+    //private String ID;
 
-    public Admin(String Nombre,String Password,String ID){
+    public Admin(String Nombre,String Password){
         super(Nombre,Password);
-        this.ID = ID;
+        //this.ID = ID;
     }
 
-    public String getID(){
+    /*public String getID(){
         return this.ID;
     }
 
     public void setID(String ID){
         this.ID = ID;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public Admin clone(){
         return new Admin(this.getNombre(), this.getPassword(), this.ID);
     }
@@ -35,5 +35,5 @@ public class Admin extends Usuario implements Cloneable{
         System.out.println(a2.getID());
         System.out.println(a1.getNombre());
         System.out.println(a1.getID());
-    }
+    }*/
 }
