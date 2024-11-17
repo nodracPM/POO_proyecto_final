@@ -44,24 +44,64 @@ public class AccUtilery {
         return admins;
     }
 
+    public static void saveClients(ArrayList<Cliente> Clientes){
+        Scanner stdIn = new Scanner(System.in);
+        ObjectOutputStream fileOut;
+        String filename;
+        System.out.print("Introduzca el nombre del archivo: ");
+        filename = stdIn.nextLine();
+        try {
+            fileOut = new ObjectOutputStream(new FileOutputStream(filename));
+            for (Cliente c:Clientes){
+                fileOut.writeObject(c);
+            }
+            fileOut.close();
+        } 
+        catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    public static ArrayList<Cliente> loadClientes(){
+        ArrayList<Cliente> Clients = new ArrayList<Cliente>();
+        Scanner stdIn = new Scanner(System.in);
+        try {
+            int n = 0;
+            ObjectInputStream fileIn;
+            System.out.print("Introduzca el nombre del archivo: ");
+            fileIn = new ObjectInputStream(new FileInputStream(stdIn.nextLine()));
+            do{
+                Clients.add((Cliente) fileIn.readObject());
+            }while(n!=1);
+            fileIn.close();
+        } catch (EOFException e) {
+            System.out.println("Archivo cargado con éxito");
+        }catch (IOException e){
+            System.out.println("IO Error: " + e.getMessage());
+        }
+        catch (ClassNotFoundException e) {
+            System.out.println("ClassNotFound " + e.getMessage());
+        }
+        return Clients;
+    }
+
     public static void main(String[] args) {
-        Admin a1 = new Admin("Mario", "1234", "Dev3");
-        Admin a2 = a1.clone();
-        a2.setNombre("Yuga");
-        a2.setPassword("777");
-        a2.setID("Dev7");
-        ArrayList<Admin> admins = new ArrayList<Admin>();
-        admins.add(a1);
-        admins.add(a2);
-        AccUtilery.saveAdmins(admins);
-        ArrayList<Admin> admins2 = AccUtilery.loadAdmins();
+        Cliente c1 = new Cliente("Mario", "1234");
+        Cliente c2 = c1.clone();
+        c2.setNombre("Yuga");
+        c2.setPassword("777");
+        ArrayList<Cliente> Clients = new ArrayList<Cliente>();
+        Clients.add(c1);
+        Clients.add(c2);
+        AccUtilery.saveClients(Clients);
+        ArrayList<Cliente> Clients2 = AccUtilery.loadClientes();
         System.out.println("Admins 1:");
-        for (Admin a: admins){
-            System.out.println(a.getNombre());
+        for (Cliente c: Clients){
+            System.out.println(c.getNombre());
         }
         System.out.println("Admins 2:");
-        for (Admin a: admins2){
-            System.out.println(a.getNombre());
+        for (Cliente c:Clients2){
+            System.out.println(c.getNombre());
         }
     }
 }
