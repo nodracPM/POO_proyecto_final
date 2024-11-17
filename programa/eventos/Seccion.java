@@ -1,4 +1,4 @@
-package eventos;
+package programa.eventos;
 
 import java.util.ArrayList;
 import java.util.HashMap;
