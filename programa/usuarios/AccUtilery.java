@@ -1,3 +1,4 @@
+package programa.usuarios;
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -85,7 +86,7 @@ public class AccUtilery {
         return Clients;
     }
 
-    public static void main(String[] args) {
+    /*ublic static void main(String[] args) {
         Cliente c1 = new Cliente("Mario", "1234");
         Cliente c2 = c1.clone();
         c2.setNombre("Yuga");
@@ -103,5 +104,5 @@ public class AccUtilery {
         for (Cliente c:Clients2){
             System.out.println(c.getNombre());
         }
-    }
+    }*/
 }
