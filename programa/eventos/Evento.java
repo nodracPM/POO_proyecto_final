@@ -21,7 +21,7 @@ public class Evento
         // Constructor vacío para uso temporal
     }
 
-    public Evento(int id, String fecha, String hora, String descripcion, Local local) {
+    public Evento(int id, Date fecha, String hora, String descripcion, Local local) {
         this.id = id;
         this.fecha = fecha;
         this.hora = hora;
