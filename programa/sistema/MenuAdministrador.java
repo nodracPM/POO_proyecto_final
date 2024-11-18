@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.InputMismatchException;
+import java.util.Date;
 
 import programa.excepciones.*;
 import programa.usuarios.AccUtilery;
@@ -161,7 +162,7 @@ public class MenuAdministrador {
             scanner.nextLine(); // Limpiar buffer
     
             System.out.print("Ingrese la fecha del Evento (YYYY-MM-DD): ");
-            String fecha = scanner.nextLine();
+            Date fecha = new Date(scanner.nextLine());
     
             System.out.print("Ingrese la hora del Evento (HH:MM): ");
             String hora = scanner.nextLine();
