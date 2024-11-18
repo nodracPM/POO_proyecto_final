@@ -42,6 +42,7 @@ public class MenuCliente {
                         Utilerias.esperarCincoSegundos();
                         break;
                     case 2:
+                        cliente.mostrarTickets();
                         break;
                     case 3: 
                         cliente.reservar(sistema);
@@ -120,6 +121,90 @@ public class MenuCliente {
         return "s"; 
     }
 
+    public void crearCuenta() {
+        String correoElectronico;
+        String password;
+        String nombre;
+        String apellidos;
+        String nombreUsuario;
+
+        Scanner scanner = new Scanner(System.in);
+
+        do {
+            Utilerias.limpiarConsola();
+            try {
+                System.out.print("Ingresa tu nombre: ");                
+                nombre = scanner.nextLine();
+                break; 
+            } catch (InputMismatchException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+            Utilerias.esperarCincoSegundos();
+        }while(true); 
+
+        do {
+            Utilerias.limpiarConsola();
+            try {
+                System.out.print("Ingresa tu primer apellido: ");                
+                apellidos = scanner.nextLine();
+                break; 
+            } catch (InputMismatchException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+            Utilerias.esperarCincoSegundos();
+        }while(true); 
+
+        do {
+            Utilerias.limpiarConsola();
+            try {
+                System.out.print("Ingresa un nombre de usuario: ");                
+                nombreUsuario = scanner.nextLine();
+                break; 
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+            Utilerias.esperarCincoSegundos();
+        }while(true); 
+
+        do {
+            Utilerias.limpiarConsola();
+            try {
+                System.out.print("Ingresa tu correo electrónico: ");                
+                correoElectronico = scanner.nextLine();
+                validarCorreo(correoElectronico);
+                verificarUsuario(correoElectronico);
+
+                break; 
+            } catch (FormatoCorreoInvalidoException e) {
+                System.out.println("Error: " + e.getMessage());
+            } catch (CorreoYaRegistradoException e) {
+                System.out.println("Error: " + e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Error inesperado: " + e.getMessage());
+            }
+            Utilerias.esperarCincoSegundos();
+        }while(true); 
+
+        do {
+            Utilerias.limpiarConsola();
+            try {
+                System.out.print("Ingresa tu contraseña: ");                
+                password = scanner.nextLine();
+
+                break; 
+            } catch (InputMismatchException e) {
+                System.out.println("Error: " + e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Error inesperado: " + e.getMessage());
+            }
+                
+            Utilerias.esperarCincoSegundos();
+        }while(true); 
+
+        Cliente cliente = new Cliente(nombreUsuario, password, nombre, apellidos, correoElectronico);
+        sistema.agregarCliente(cliente);
+    }
+
 
 
     // Método para validar el formato del correo electrónico
@@ -141,6 +226,13 @@ public class MenuCliente {
     private boolean autenticarUsuario(String correo, String contrasena) throws NoRegistradoException{
         if (!sistema.getClientes().containsKey(correo) || !sistema.getClientes().get(correo).getPassword().equals(contrasena)) {
             throw new NoRegistradoException("El correo no se encuentra registrado o la contraseña es incorrecta"); // !sistema.clientes.containsKey(correo);
+        }
+        return true; 
+    }
+
+    private boolean verificarUsuario(String correo) throws CorreoYaRegistradoException{
+        if (sistema.getClientes().containsKey(correo)) {
+            throw new CorreoYaRegistradoException("El correo ya ha sido registrado."); // !sistema.clientes.containsKey(correo);
         }
         return true; 
     }

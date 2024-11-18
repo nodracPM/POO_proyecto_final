@@ -21,7 +21,8 @@ public class MenuPrincipal {
             System.out.println("\n===== Menú Principal =====");
             System.out.println("1. Iniciar sesión como cliente");
             System.out.println("2. Iniciar sesión como administrador");
-            System.out.println("3. Salir");
+            System.out.println("3. Crear cuenta.");
+            System.out.println("4. Salir");
             System.out.print("Selecciona una opción: ");
 
             do {
@@ -48,12 +49,16 @@ public class MenuPrincipal {
                     menuAdministrador.menuAdministrador();
                     break;
                 case 3:
+                    MenuCliente menuCliente2 = new MenuCliente(sistema);
+                    menuCliente2.crearCuenta();
+                    break;
+                case 4:
                     break;
                 default:
                     System.out.println("Opción inválida. Por favor, selecciona una opción válida.");
                     Utilerias.esperarCincoSegundos();
             }
-        } while (opcion != 3);
+        } while (opcion != 4);
 
         scanner.close();
     }

@@ -1,7 +1,10 @@
 package programa.eventos;
 
 import java.util.ArrayList;
+
+import java.util.Scanner;
 import java.util.Date;
+
 
 public class Evento
 {
@@ -12,6 +15,19 @@ public class Evento
     private String hora;
     private Local local;
     private double ganancias;
+    private String descripcion;
+
+    public Evento() {
+        // Constructor vacío para uso temporal
+    }
+
+    public Evento(int id, String fecha, String hora, String descripcion, Local local) {
+        this.id = id;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.descripcion = descripcion;
+        this.local = local;
+    }
 
     public Evento(int id, Date fecha, String hora, Local local)
     {
@@ -116,5 +132,24 @@ public class Evento
                "\nCapacidad Total: " + local.getCapacidadTotal() +
                "\nGanancias Estimadas: $" + String.format("%.2f", calcular_Ganancias()) +
                "\nResumen de Disponibilidad:\n" + resumenDisponibilidad();
+    }
+
+        public String definirDescripcion() 
+     {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Escribe el tipo de evento (Ejemplo: Concierto, Conferencia): ");
+        String tipoEvento = scanner.nextLine();
+
+        System.out.println("Escribe los participantes o artistas del evento: ");
+        String participantes = scanner.nextLine();
+
+        System.out.println("Escribe detalles adicionales (Ejemplo: Duración, Reglas, etc.): ");
+        String detallesAdicionales = scanner.nextLine();
+
+        // Crear la descripción combinando los datos
+        return this.descripcion = "Tipo de evento: " + tipoEvento + "\n" +
+                           "Participantes: " + participantes + "\n" +
+                           "Detalles adicionales: " + detallesAdicionales;
     }
 }

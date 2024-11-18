@@ -2,7 +2,8 @@ package programa.sistema;
 
 import java.util.LinkedList;
 import java.util.HashMap; 
-import programa.usuarios.*; 
+import programa.usuarios.*;
+import programa.utilerias.Utilerias;
 import programa.eventos.*;
 
 public class Sistema {
@@ -69,6 +70,7 @@ public class Sistema {
         clientes.put(cliente.getCorreoElectronico(), cliente);
     }
 
+
     public void eliminarCliente(String correoElectronico) {
         if(!this.clientes.containsKey(correoElectronico)) {
             System.out.println("El correo electrónico ingresado no se encuentra registrado");
@@ -76,7 +78,7 @@ public class Sistema {
         }
         this.clientes.remove(correoElectronico);
     }
-
+    
     public void agregarEvento(Evento evento) {
         this.eventos.add(evento);
     }
@@ -90,5 +92,14 @@ public class Sistema {
             System.out.println("------------------------------------------------------------");
             System.out.println(evento.toString());
         }
+    }
+
+    public void cargarEventos() {
+        eventos = Utilerias.convertirArrayListALinkedList(AccUtilery.loadEventos());
+        System.out.println("Eventos cargados: " + eventos.size());
+    }
+
+    public void guardarEventos() {
+        AccUtilery.saveEventos(Utilerias.convertirLinkedListAArrayList(eventos));
     }
 }
