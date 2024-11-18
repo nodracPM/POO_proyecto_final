@@ -29,15 +29,16 @@ public class MenuAdministrador {
             Utilerias.limpiarConsola();
             System.out.println("\n===== Menú de Cliente =====");
             System.out.println("1. Agregar evento.");
-            System.out.println("2. .....");
-            System.out.println("3. .....");
+            System.out.println("2. Eliminar evento.");
+            System.out.println("3. Consultar estados de los eventos.");
             System.out.println("4. Salir.");
             System.out.print("Selecciona una opcion: ");
 
             try {
                 opcion = scanner.nextInt();
                 switch (opcion) {
-                    case 1:
+                    case 1: 
+                        
                         break;
                     case 2:
                         break;

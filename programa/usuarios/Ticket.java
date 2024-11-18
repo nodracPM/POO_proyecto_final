@@ -1,12 +1,14 @@
+package programa.usuarios;
+
 import java.io.*;
 
 public class Ticket implements Serializable{
-    private String Asientos;
+    private int Asientos;
     private String Propietario;
     private String FechaCompra;
     //private Evento evento;
 
-    public Ticket (String Asientos,String Propietario,String FechaCompra/* ,Evento evento*/){
+    public Ticket (int Asientos,String Propietario,String FechaCompra/* ,Evento evento*/){
         this.Asientos=Asientos;
         this.Propietario=Propietario;
         this.FechaCompra=FechaCompra;

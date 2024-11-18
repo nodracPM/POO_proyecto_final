@@ -26,6 +26,7 @@ public class Sistema {
          */
         this.admin = new Admin("Admi", "Admi91711");
         this.clientes = new HashMap<String, Cliente>(); 
+        this.eventos = new LinkedList<Evento>();
 
     }
 
@@ -44,8 +45,16 @@ public class Sistema {
 
     public void setClientes(HashMap<String, Cliente> clientes) {
         this.clientes = clientes;
+    }   
+
+    public void setEventos(LinkedList<Evento> eventos) {
+        this.eventos = eventos;
     }
-    
+
+    public LinkedList<Evento> getEventos() {
+        return this.eventos;
+    }
+
     // Métodos
     public void pantallaPrincipal() {
         System.out.println("Bienvenido al sistema de administración de clientes");
@@ -68,23 +77,18 @@ public class Sistema {
         this.clientes.remove(correoElectronico);
     }
 
-    public void iniciarSesion(String correoElectronico, String password) {
-        if(!this.clientes.containsKey(correoElectronico)) {
-            System.out.println("El correo electrónico ingresado no se encuentra registrado");
-            return; 
-        }
-        if(!this.clientes.get(correoElectronico).getPassword().equals(password)) {
-            System.out.println("La contraseña ingresada es incorrecta");
-            return; 
-        }
-        //System.out.println("¡Bienvenido, " + this.clientes.get(correoElectronico).getNombre() + "!");
-    }
-
-    public void agreagarEvento(Evento evento) {
+    public void agregarEvento(Evento evento) {
         this.eventos.add(evento);
     }
 
     public void eliminarEvento(Evento evento) {
         this.eventos.remove(evento);
+    }
+
+    public void mostrarEventos() {
+        for(Evento evento : this.eventos) {
+            System.out.println("------------------------------------------------------------");
+            System.out.println(evento.toString());
+        }
     }
 }

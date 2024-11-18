@@ -5,9 +5,23 @@ public class Tarjeta implements MetodoPago{
     String fechaVencimiento;
     String CVV;
 
+    public Tarjeta() {}
+
     public Tarjeta(String numero, String fechaVencimiento, String CVV) {
         this.numero = numero;
         this.fechaVencimiento = fechaVencimiento;
+        this.CVV = CVV;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public void setFechaVencimiento(String fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
+    }   
+
+    public void setCVV(String CVV) {
         this.CVV = CVV;
     }
 
