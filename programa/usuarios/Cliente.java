@@ -33,17 +33,6 @@ public class Cliente extends Usuario implements Cloneable{
         return new Cliente(this.getNombre(), this.getPassword());
     }*/
 
-    /*public static void main(String[] args) {
-        Cliente c1 = new Cliente("Mario", "12345");
-        System.out.println("Antes de clonar: "+c1.getNombre());
-        Cliente c2 = c1.clone();
-        c2.setNombre("Yuga");
-        c2.setPassword("777");
-        System.out.println("Después de clonar y modificar");
-        System.out.println(c2.getNombre());
-        System.out.println(c1.getNombre());
-
-    }*/
 
     public String getNombre() {
         return this.nombre;
@@ -183,5 +172,12 @@ public class Cliente extends Usuario implements Cloneable{
                 System.out.println("-------------------------------------------------");
             }
         }
+    }
+
+    public void TicketTransfer(Cliente destino, Ticket boleto){
+        temp = boleto.clone();
+        temp.setPropietario(destino.getNombreUsuario());
+        destino.getReservaciones().add(temp);
+        self.getReservaciones().remove(boleto);
     }
 }
