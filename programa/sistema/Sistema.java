@@ -2,7 +2,8 @@ package programa.sistema;
 
 import java.util.LinkedList;
 import java.util.HashMap; 
-import programa.usuarios.*; 
+import programa.usuarios.*;
+import programa.utilerias.Utilerias;
 import programa.eventos.*;
 
 public class Sistema {
@@ -90,5 +91,14 @@ public class Sistema {
             System.out.println("------------------------------------------------------------");
             System.out.println(evento.toString());
         }
+    }
+
+    public void cargarEventos() {
+        eventos = Utilerias.convertirArrayListALinkedList(AccUtilery.loadEventos());
+        System.out.println("Eventos cargados: " + eventos.size());
+    }
+
+    public void guardarEventos() {
+        AccUtilery.saveEventos(Utilerias.convertirLinkedListAArrayList(eventos));
     }
 }

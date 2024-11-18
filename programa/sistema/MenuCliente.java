@@ -42,6 +42,7 @@ public class MenuCliente {
                         Utilerias.esperarCincoSegundos();
                         break;
                     case 2:
+                        cliente.mostrarTickets();
                         break;
                     case 3: 
                         cliente.reservar(sistema);

@@ -1,5 +1,7 @@
 package programa.utilerias;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Utilerias {
@@ -38,5 +40,14 @@ public class Utilerias {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Presiona Enter para continuar...");
         scanner.nextLine(); // Espera hasta que el usuario presione Enter
+    }
+    public static <T> LinkedList<T> convertirArrayListALinkedList(ArrayList<T> arrayList) {
+        // Constructor de LinkedList que acepta una colección
+        return new LinkedList<>(arrayList);
+    }
+
+    public static <T> ArrayList<T> convertirLinkedListAArrayList(LinkedList<T> linkedList) {
+        // Constructor de ArrayList que acepta una colección
+        return new ArrayList<>(linkedList);
     }
 }

@@ -2,6 +2,7 @@ package programa.usuarios;
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
+import programa.eventos.*;;
 
 public class AccUtilery {
     public static void saveAdmins(ArrayList<Admin> Admins){
@@ -86,6 +87,42 @@ public class AccUtilery {
         return Clients;
     }
 
+    public static void saveLocales(ArrayList<Local> locales) {
+        Scanner stdIn = new Scanner(System.in);
+        ObjectOutputStream fileOut;
+        String filename;
+        System.out.print("Introduzca el nombre del archivo para guardar los locales: ");
+        filename = stdIn.nextLine();
+        try {
+            fileOut = new ObjectOutputStream(new FileOutputStream(filename));
+            for (Local local : locales) {
+                fileOut.writeObject(local);
+            }
+            fileOut.close();
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+    
+    public static ArrayList<Local> loadLocales() {
+        ArrayList<Local> locales = new ArrayList<>();
+        Scanner stdIn = new Scanner(System.in);
+        System.out.print("Introduzca el nombre del archivo para cargar los locales: ");
+        String filename = stdIn.nextLine();
+    
+        try (ObjectInputStream fileIn = new ObjectInputStream(new FileInputStream(filename))) {
+            while (true) {
+                locales.add((Local) fileIn.readObject());
+            }
+        } catch (EOFException e) {
+            System.out.println("Archivo cargado con éxito.");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    
+        return locales;
+    }
+
     /*ublic static void main(String[] args) {
         Cliente c1 = new Cliente("Mario", "1234");
         Cliente c2 = c1.clone();
@@ -105,4 +142,42 @@ public class AccUtilery {
             System.out.println(c.getNombre());
         }
     }*/
+
+    public static void saveEventos(ArrayList<Evento> eventos) {
+        Scanner stdIn = new Scanner(System.in);
+        ObjectOutputStream fileOut;
+        String filename;
+        System.out.print("Introduzca el nombre del archivo para guardar los eventos: ");
+        filename = stdIn.nextLine();
+        try {
+            fileOut = new ObjectOutputStream(new FileOutputStream(filename));
+            for (Evento evento : eventos) {
+                fileOut.writeObject(evento);
+            }
+            fileOut.close();
+            System.out.println("Eventos guardados exitosamente en " + filename);
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    
+    public static ArrayList<Evento> loadEventos() {
+        ArrayList<Evento> eventos = new ArrayList<>();
+        Scanner stdIn = new Scanner(System.in);
+        System.out.print("Introduzca el nombre del archivo para cargar los eventos: ");
+        String filename = stdIn.nextLine();
+    
+        try (ObjectInputStream fileIn = new ObjectInputStream(new FileInputStream(filename))) {
+            while (true) {
+                eventos.add((Evento) fileIn.readObject());
+            }
+        } catch (EOFException e) {
+            System.out.println("Archivo cargado con éxito.");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    
+        return eventos;
+    }
 }
