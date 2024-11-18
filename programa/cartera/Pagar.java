@@ -2,9 +2,11 @@ package programa.cartera;
 
 public class Pagar implements Visitor{
     public void visit(Tarjeta tarjeta) {
-        // Aquí va toda la lógica para pagar con tarjera 
+        System.out.println("\nLa transacción ha sido completada");
+        System.out.println("Número de tarjeta: " + tarjeta.getNumero());
     }
     public void visit(PayPal paypal) {
-        // Aquí va toda la lógica para pagar con PayPal
+        System.out.println("\nLa transacción ha sido completada");
+        System.out.println("Correo electrónco: " + paypal.getCorreo());
     }
 }

@@ -36,10 +36,15 @@ public class MenuCliente {
                 opcion = scanner.nextInt();
                 switch (opcion) {
                     case 1:
+                        sistema.mostrarEventos();
+                        //System.out.println("\nPresione cualquier tecla para continuar...");
+                        //String aux =scanner.nextLine();
+                        Utilerias.esperarCincoSegundos();
                         break;
                     case 2:
                         break;
                     case 3: 
+                        cliente.reservar(sistema);
                         break;
                     case 4: 
                         break;

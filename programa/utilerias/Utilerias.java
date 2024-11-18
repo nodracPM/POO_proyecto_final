@@ -1,5 +1,7 @@
 package programa.utilerias;
 
+import java.util.Scanner;
+
 public class Utilerias {
     public static void limpiarConsola() {
         try {
@@ -30,5 +32,11 @@ public class Utilerias {
             // Manejo de excepción si el hilo es interrumpido
             System.out.println("La espera fue interrumpida: " + e.getMessage());
         }
+    }
+
+    public static void esperarTecla() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Presiona Enter para continuar...");
+        scanner.nextLine(); // Espera hasta que el usuario presione Enter
     }
 }
