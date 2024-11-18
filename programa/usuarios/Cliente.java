@@ -9,6 +9,7 @@ import programa.utilerias.Utilerias;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.Date;
 
 public class Cliente extends Usuario implements Cloneable{
     String nombre; 
@@ -99,7 +100,7 @@ public class Cliente extends Usuario implements Cloneable{
             metodo.acceptVisitor(new Pagar());
 
             Evento evento = sistema.getEventos().get(idEvento - 1);
-            Ticket ticket = new Ticket(evento.getAsientos(), this.getNombre(), evento.getFecha());
+            Ticket ticket = new Ticket(evento.getAsientos(), this.getNombre(), new Date(),evento.getFecha(),evento.getHora(),evento.getlocal().getNombre());
             tickets.add(ticket);
             System.out.println("\nGracias por su compra.");
         }
