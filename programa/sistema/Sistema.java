@@ -70,6 +70,7 @@ public class Sistema {
         clientes.put(cliente.getCorreoElectronico(), cliente);
     }
 
+
     public void eliminarCliente(String correoElectronico) {
         if(!this.clientes.containsKey(correoElectronico)) {
             System.out.println("El correo electrónico ingresado no se encuentra registrado");
@@ -77,7 +78,7 @@ public class Sistema {
         }
         this.clientes.remove(correoElectronico);
     }
-
+    
     public void agregarEvento(Evento evento) {
         this.eventos.add(evento);
     }

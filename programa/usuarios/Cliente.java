@@ -174,10 +174,10 @@ public class Cliente extends Usuario implements Cloneable{
         }
     }
 
-    public void TicketTransfer(Cliente destino, Ticket boleto){
+    /*public void TicketTransfer(Cliente destino, Ticket boleto){
         temp = boleto.clone();
         temp.setPropietario(destino.getNombreUsuario());
         destino.getReservaciones().add(temp);
         self.getReservaciones().remove(boleto);
-    }
+    }*/
 }
