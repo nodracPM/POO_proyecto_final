@@ -1,18 +1,19 @@
 package programa.eventos;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Evento
 {
     private int id;
     private int asientos;
     private ArrayList<Double> precios;
-    private String fecha;
+    private Date fecha;
     private String hora;
     private Local local;
     private double ganancias;
 
-    public Evento(int id, String fecha, String hora, Local local)
+    public Evento(int id, Date fecha, String hora, Local local)
     {
         this.id= id;
         this.fecha = fecha;
@@ -37,7 +38,7 @@ public class Evento
         return asientos;
     }
 
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
@@ -65,7 +66,7 @@ public class Evento
         this.asientos = asientos;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
